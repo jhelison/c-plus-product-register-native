@@ -18,3 +18,17 @@ export interface IProduct {
     ESTOQUE: IStock
     PRECO: number
 }
+
+export interface IUser {
+    id: number
+    phone_id: string
+    name: string
+    created_at: string
+}
+
+export interface IUpdate {
+    id: number
+    user: IUser
+    product_code: string
+    created_at: string
+}
