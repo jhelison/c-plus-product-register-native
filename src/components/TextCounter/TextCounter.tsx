@@ -17,6 +17,12 @@ const TextCounter: React.FC<IProps> = ({ onChangeText, value }) => {
         onChangeText((num - 1).toString())
     }
 
+    const toNegative = () => {
+        const num = parseFloat(value) * -1
+
+        onChangeText(num.toString())
+    }
+
     const add = () => {
         const num = parseFloat(value)
 
@@ -43,7 +49,11 @@ const TextCounter: React.FC<IProps> = ({ onChangeText, value }) => {
 
     return (
         <View style={styles.wrapper}>
-            <TouchableHighlight style={styles.touchWrapper} onPress={subtract}>
+            <TouchableHighlight
+                style={styles.touchWrapper}
+                onPress={subtract}
+                onLongPress={toNegative}
+            >
                 <Text
                     style={[
                         styles.inputText,
