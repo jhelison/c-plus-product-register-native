@@ -20,7 +20,7 @@ const ProductDatailScreen: React.FC<Props> = ({ route, navigation }) => {
     const { CODPROD } = route.params!
     const [product, setProduct] = useState<IProduct | undefined>(undefined)
     const [stock, setStock] = useState(0)
-    const [modalVisible, setModalVisible] = useState(true)
+    const [modalVisible, setModalVisible] = useState(false)
 
     useEffect(() => {
         getProduct()
@@ -32,7 +32,6 @@ const ProductDatailScreen: React.FC<Props> = ({ route, navigation }) => {
     }, [])
 
     const getProduct = async () => {
-        console.log('up')
         try {
             const res = await api.get(`/products/${CODPROD}`)
             setProduct(res.data as IProduct)
