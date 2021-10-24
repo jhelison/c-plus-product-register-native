@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { StatusBar, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { StatusBar, Text, ToastAndroid, View } from 'react-native'
 import changeNavigationBarColor from 'react-native-navigation-bar-color'
 import { getUniqueId } from 'react-native-device-info'
 
@@ -7,11 +7,22 @@ import styles from './screens/styles'
 
 import theme from './styles/theme'
 import StackNavigation from './navigation/StackNavigation'
-import api from './API/Axios'
+import api, { setToken } from './API/Axios'
+import Button from './components/Button/Button'
+import { AxiosError } from 'axios'
+import CustomTextInput from './components/CustomTextInput/Text'
+
+interface IToken {
+    token: string
+}
 
 const App: React.FC = () => {
+    const [screen, setScreen] = useState<string | null>(null)
+    const [userName, setUserName] = useState('')
+
     useEffect(() => {
         updateNavigationBarColor()
+        getToken()
     }, [])
 
     const updateNavigationBarColor = () => {
@@ -24,15 +35,73 @@ const App: React.FC = () => {
         }
 
         try {
-            const res = api.post('/auth/', data)
+            const res = await api.post('/auth/', data)
+            setToken((res.data as IToken).token)
+            setScreen('app')
         } catch (error: any) {
-            console.log('error')
+            if (error.request?.status === 404) {
+                return setScreen('signin')
+            }
+            ToastAndroid.show(error.message, ToastAndroid.SHORT)
+            setScreen('error')
+        }
+    }
+
+    const createUser = async () => {
+        const data = {
+            phone_id: getUniqueId(),
+            name: userName
+        }
+
+        try {
+            const res = await api.put('/users/', data)
+            getToken()
+        } catch (error: any) {
+            ToastAndroid.show(error.message, ToastAndroid.SHORT)
+            setScreen('error')
+        }
+    }
+
+    const getScreen = () => {
+        if (screen === 'signin') {
+            return (
+                <View
+                    style={{
+                        justifyContent: 'center',
+                        width: '100%',
+                        height: '100%'
+                    }}
+                >
+                    <CustomTextInput
+                        placeholder="Nome do usuario"
+                        value={userName}
+                        onChangeText={(value) => setUserName(value)}
+                        onPress={createUser}
+                    />
+                </View>
+            )
+        }
+        if (screen === 'app') {
+            return <StackNavigation />
+        }
+        if (screen === 'error') {
+            return (
+                <View
+                    style={{
+                        justifyContent: 'center',
+                        width: '100%',
+                        height: '100%'
+                    }}
+                >
+                    <Button text="Tentar novamente" onPress={getToken} />
+                </View>
+            )
         }
     }
 
     return (
         <View style={styles.wrapper}>
-            <StackNavigation />
+            {getScreen()}
             <StatusBar backgroundColor={theme.colors.mainBg} />
         </View>
     )
