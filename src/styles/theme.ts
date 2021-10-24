@@ -7,7 +7,14 @@ export default {
         black: '#030517',
         lightGray: '#EAEAEA',
         gray: '#8F8F8F',
-        darkGray: '#2E2F42'
+        darkGray: '#2E2F42',
+        status: {
+            critical: '#e03b24',
+            serious: '#ffb302',
+            caution: '#fce83a',
+            normal: '#64a338',
+            standby: '#2dccff'
+        }
     },
     font: {
         sizes: {
