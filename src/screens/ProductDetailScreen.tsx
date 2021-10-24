@@ -7,6 +7,7 @@ import styles from './styles'
 import api from '../API/Axios'
 import { IProduct } from '../types/types'
 import UpdateModal from '../components/UpdateModal/UpdateModal'
+import TextCounter from '../components/TextCounter/TextCounter'
 
 type RootStackParamList = {
     Search: undefined
@@ -19,10 +20,8 @@ const ProductDatailScreen: React.FC<Props> = ({ route, navigation }) => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { CODPROD } = route.params!
     const [product, setProduct] = useState<IProduct | undefined>(undefined)
-    const [stock, setStock] = useState(0)
+    const [stock, setStock] = useState('0')
     const [modalVisible, setModalVisible] = useState(false)
-
-    console.log(route)
 
     useEffect(() => {
         getProduct()
@@ -44,10 +43,8 @@ const ProductDatailScreen: React.FC<Props> = ({ route, navigation }) => {
 
     const updateStock = async () => {
         const data = {
-            amount: stock
+            amount: parseFloat(stock)
         }
-
-        console.log(data)
 
         try {
             await api.patch(`/stock/?CODPROD=${CODPROD}`, data)
@@ -62,14 +59,6 @@ const ProductDatailScreen: React.FC<Props> = ({ route, navigation }) => {
         const onGoBack = route.params!['onGoBack'] as (CODPROD: string) => void
         onGoBack(CODPROD)
         navigation.goBack()
-    }
-
-    const OnChangeText = (value: string) => {
-        if (value) {
-            setStock(parseInt(value))
-        } else {
-            setStock(0)
-        }
     }
 
     return (
@@ -92,11 +81,9 @@ const ProductDatailScreen: React.FC<Props> = ({ route, navigation }) => {
             </View>
             <View style={styles.centerTexts}>
                 <Text style={styles.stockText}>Quanto a mais?</Text>
-                <TextInput
-                    style={styles.inputText}
-                    value={stock.toString()}
-                    keyboardType="phone-pad"
-                    onChangeText={OnChangeText}
+                <TextCounter
+                    value={stock}
+                    onChangeText={(value) => setStock(value)}
                 />
             </View>
             <Button text="Salvar" onPress={updateStock} />

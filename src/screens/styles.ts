@@ -21,10 +21,6 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center'
-    },
-    inputText: {
-        color: theme.colors.white,
-        fontSize: theme.font.sizes.xxlarge * 3
     }
 })
 
