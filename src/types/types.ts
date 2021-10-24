@@ -31,4 +31,5 @@ export interface IUpdate {
     user: IUser
     product_code: string
     created_at: string
+    quantity: number
 }

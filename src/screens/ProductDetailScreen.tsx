@@ -6,6 +6,7 @@ import Button from '../components/Button/Button'
 import styles from './styles'
 import api from '../API/Axios'
 import { IProduct } from '../types/types'
+import UpdateModal from '../components/UpdateModal/UpdateModal'
 
 type RootStackParamList = {
     Search: undefined
@@ -19,6 +20,7 @@ const ProductDatailScreen: React.FC<Props> = ({ route, navigation }) => {
     const { CODPROD } = route.params!
     const [product, setProduct] = useState<IProduct | undefined>(undefined)
     const [stock, setStock] = useState(0)
+    const [modalVisible, setModalVisible] = useState(true)
 
     useEffect(() => {
         getProduct()
@@ -68,7 +70,16 @@ const ProductDatailScreen: React.FC<Props> = ({ route, navigation }) => {
 
     return (
         <View style={styles.wrapper}>
-            <Header onPress={goBack} title={product?.NOMEPROD} />
+            <UpdateModal
+                onRequestClose={() => setModalVisible(false)}
+                visible={modalVisible}
+                CODPROD={CODPROD}
+            />
+            <Header
+                onPress={goBack}
+                title={product?.NOMEPROD}
+                infoPress={() => setModalVisible(true)}
+            />
             <View style={styles.centerTexts}>
                 <Text style={styles.stockText}>Estoque atual</Text>
                 <Text style={styles.stockNumber}>
