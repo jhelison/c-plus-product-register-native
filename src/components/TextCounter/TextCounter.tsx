@@ -70,6 +70,7 @@ const TextCounter: React.FC<IProps> = ({ onChangeText, value }) => {
                 keyboardType="phone-pad"
                 onChangeText={reExperiment}
                 onBlur={parseToFloat}
+                maxLength={5}
             />
 
             <TouchableHighlight style={styles.touchWrapper} onPress={add}>
