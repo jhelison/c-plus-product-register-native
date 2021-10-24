@@ -6,10 +6,11 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 50,
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'space-between'
     },
 
-    goBackWrapper: {
+    iconWrapper: {
         height: '100%',
         width: 50,
         justifyContent: 'center',
