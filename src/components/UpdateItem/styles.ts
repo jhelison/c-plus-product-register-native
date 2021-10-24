@@ -13,6 +13,15 @@ const styles = StyleSheet.create({
     },
     userText: {
         fontSize: theme.font.sizes.large
+    },
+    timeText: {
+        textAlign: 'right'
+    },
+    flex2: {
+        flex: 2
+    },
+    flex1: {
+        flex: 1
     }
 })
 

@@ -13,20 +13,28 @@ interface IProps {
 const UpdateItem: React.FC<IProps> = ({ item }) => {
     return (
         <View style={styles.wrapper}>
-            <Text style={styles.userText}>{item.user.name}</Text>
+            <Text style={[styles.userText, styles.flex2]}>
+                {item.user.name}
+            </Text>
             <Text
-                style={{
-                    color:
-                        item.quantity >= 0
-                            ? theme.colors.status.normal
-                            : theme.colors.status.critical,
-                    fontSize: theme.font.sizes.large,
-                    fontWeight: 'bold'
-                }}
+                style={[
+                    {
+                        color:
+                            item.quantity >= 0
+                                ? theme.colors.status.normal
+                                : theme.colors.status.critical,
+                        fontSize: theme.font.sizes.large,
+                        fontWeight: 'bold',
+                        textAlign: 'center'
+                    },
+                    styles.flex1
+                ]}
             >
                 {item.quantity}
             </Text>
-            <Text>{moment(item.created_at).fromNow()}</Text>
+            <Text style={[styles.timeText, styles.flex2]}>
+                {moment(item.created_at).fromNow()}
+            </Text>
         </View>
     )
 }
