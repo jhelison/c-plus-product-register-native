@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FlatList, View } from 'react-native'
+import { FlatList, ToastAndroid, View } from 'react-native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 import SearchBar from '../components/SearchBar/SearchBar'
@@ -11,7 +11,7 @@ import { IProduct } from '../types/types'
 
 type RootStackParamList = {
     Search: undefined
-    Details: { CODPROD: string }
+    Details: { CODPROD: string; onGoBack: (CODPROD: string) => void }
 }
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Search'>
@@ -52,8 +52,9 @@ const SearchScreen: React.FC<Props> = ({ navigation }) => {
             setLoading(false)
 
             page = page + 1
-        } catch (error) {
-            console.log(error)
+        } catch (error: any) {
+            setLoading(false)
+            ToastAndroid.show(error.message, ToastAndroid.SHORT)
         }
     }
 
@@ -72,15 +73,38 @@ const SearchScreen: React.FC<Props> = ({ navigation }) => {
 
     const navigateTo = (CODPROD: string) => {
         setLastEntered(CODPROD)
-        navigation.navigate('Details', { CODPROD })
+        navigation.navigate('Details', { CODPROD, onGoBack: onGoBack })
     }
 
     const setFlatListRef = (ref: FlatList<IProduct> | null) => {
         flatListRef = ref
     }
 
-    const onGoBack = () => {
-        onSubmitEditing()
+    const getProduct = async (CODPROD: string) => {
+        try {
+            const res = await api.get(`/products/${CODPROD}`)
+            return res.data as IProduct
+        } catch (error: any) {
+            ToastAndroid.show(error.message, ToastAndroid.SHORT)
+        }
+    }
+
+    const onGoBack = async (CODPROD: string) => {
+        const idx = products?.findIndex((product) => {
+            return product.CODPROD === CODPROD
+        })
+        const new_product = await getProduct(CODPROD)
+
+        if (new_product && idx !== undefined) {
+            const products_clone = JSON.parse(
+                JSON.stringify(products)
+            ) as IProduct[]
+
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            products_clone[idx!] = new_product
+
+            setProducts(products_clone)
+        }
     }
 
     return (

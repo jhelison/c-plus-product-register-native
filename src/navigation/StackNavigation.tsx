@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import SearchScreen from '../screens/SearchScreen'
 import ProductDatailScreen from '../screens/ProductDetailScreen'
 import changeNavigationBarColor from 'react-native-navigation-bar-color'
+import { LogBox } from 'react-native'
 
 type RootStackParamList = {
     Search: undefined
@@ -12,6 +13,10 @@ type RootStackParamList = {
 }
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
+
+LogBox.ignoreLogs([
+    'Non-serializable values were found in the navigation state'
+])
 
 const StackNavigation = () => {
     useEffect(() => {

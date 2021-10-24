@@ -22,6 +22,8 @@ const ProductDatailScreen: React.FC<Props> = ({ route, navigation }) => {
     const [stock, setStock] = useState(0)
     const [modalVisible, setModalVisible] = useState(false)
 
+    console.log(route)
+
     useEffect(() => {
         getProduct()
 
@@ -49,13 +51,16 @@ const ProductDatailScreen: React.FC<Props> = ({ route, navigation }) => {
 
         try {
             await api.patch(`/stock/?CODPROD=${CODPROD}`, data)
-            navigation.goBack()
+            goBack()
         } catch (error: any) {
             ToastAndroid.show(error.message, ToastAndroid.SHORT)
         }
     }
 
     const goBack = () => {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const onGoBack = route.params!['onGoBack'] as (CODPROD: string) => void
+        onGoBack(CODPROD)
         navigation.goBack()
     }
 
