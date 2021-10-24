@@ -19,7 +19,9 @@ const UpdateItem: React.FC<IProps> = ({ item }) => {
                     color:
                         item.quantity >= 0
                             ? theme.colors.status.normal
-                            : theme.colors.status.critical
+                            : theme.colors.status.critical,
+                    fontSize: theme.font.sizes.large,
+                    fontWeight: 'bold'
                 }}
             >
                 {item.quantity}
