@@ -17,7 +17,9 @@ const Header: React.FC<IProps> = ({ onPress, title, infoPress }) => {
             <TouchableOpacity style={styles.iconWrapper} onPress={onPress}>
                 <Icon name="angle-left" size={30} color={theme.colors.white} />
             </TouchableOpacity>
-            <Text style={styles.titleText}>{title}</Text>
+            <View style={styles.textWrapper}>
+                <Text style={styles.titleText}>{title}</Text>
+            </View>
             <TouchableOpacity style={styles.iconWrapper} onPress={infoPress}>
                 <Icon
                     name="exclamation-circle"

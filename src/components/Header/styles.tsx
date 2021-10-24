@@ -19,7 +19,11 @@ const styles = StyleSheet.create({
 
     titleText: {
         color: theme.colors.white,
+        textAlign: 'center',
         fontSize: theme.font.sizes.large
+    },
+    textWrapper: {
+        flex: 1
     }
 })
 
