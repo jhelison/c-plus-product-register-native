@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     },
     inputText: {
         color: theme.colors.white,
-        fontSize: theme.font.sizes.xxlarge * 3,
+        fontSize: theme.font.sizes.xxlarge * 2,
         marginHorizontal: theme.spacings.medium
     },
     touchWrapper: {
