@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: theme.spacings.xsmall,
-        marginBottom: theme.spacings.xsmall
+        marginBottom: theme.spacings.xsmall,
+        height: 60
     },
     TextInput: {
         flexGrow: 1,
