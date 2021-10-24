@@ -101,9 +101,9 @@ const ProductListItem: React.FC<IProps> = ({
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const isEqual = (prevProps: any, nextProps: any) => {
+const isEqual = (prevProps: IProps, nextProps: IProps) => {
     const isDataEqual =
-        JSON.stringify(prevProps.product) === JSON.stringify(nextProps.product)
+        prevProps.product.ESTOQUE.ESTATU === nextProps.product.ESTOQUE.ESTATU
     const isOpenEqual = prevProps.isLastEntered === nextProps.isLastEntered
     return isDataEqual && isOpenEqual
 }

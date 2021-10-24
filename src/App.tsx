@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StatusBar, Text, ToastAndroid, View } from 'react-native'
+import { StatusBar, ToastAndroid, View } from 'react-native'
 import changeNavigationBarColor from 'react-native-navigation-bar-color'
 import { getUniqueId } from 'react-native-device-info'
 
@@ -9,7 +9,6 @@ import theme from './styles/theme'
 import StackNavigation from './navigation/StackNavigation'
 import api, { setToken } from './API/Axios'
 import Button from './components/Button/Button'
-import { AxiosError } from 'axios'
 import CustomTextInput from './components/CustomTextInput/Text'
 
 interface IToken {

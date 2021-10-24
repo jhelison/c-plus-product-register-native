@@ -90,21 +90,22 @@ const SearchScreen: React.FC<Props> = ({ navigation }) => {
     }
 
     const onGoBack = async (CODPROD: string) => {
-        const idx = products?.findIndex((product) => {
-            return product.CODPROD === CODPROD
-        })
-        const new_product = await getProduct(CODPROD)
+        onSubmitEditing()
+        // const idx = products?.findIndex((product) => {
+        //     return product.CODPROD === CODPROD
+        // })
+        // const new_product = await getProduct(CODPROD)
 
-        if (new_product && idx !== undefined) {
-            const products_clone = JSON.parse(
-                JSON.stringify(products)
-            ) as IProduct[]
+        // if (new_product && idx !== undefined) {
+        //     const products_clone = JSON.parse(
+        //         JSON.stringify(products)
+        //     ) as IProduct[]
 
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            products_clone[idx!] = new_product
+        //     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        //     products_clone[idx!] = new_product
 
-            setProducts(products_clone)
-        }
+        //     setProducts(products_clone)
+        // }
     }
 
     return (
