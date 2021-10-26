@@ -12,19 +12,31 @@ const regex = new RegExp('^[+-]?([0-9]+\\.?[0-9]*|\\.[0-9]+)$')
 
 const TextCounter: React.FC<IProps> = ({ onChangeText, value }) => {
     const subtract = () => {
-        const num = parseFloat(value)
+        let num = parseFloat(value)
+
+        if (isNaN(num)) {
+            num = 0
+        }
 
         onChangeText((num - 1).toString())
     }
 
     const toNegative = () => {
-        const num = parseFloat(value) * -1
+        let num = parseFloat(value) * -1
+
+        if (isNaN(num)) {
+            num = 0
+        }
 
         onChangeText(num.toString())
     }
 
     const add = () => {
-        const num = parseFloat(value)
+        let num = parseFloat(value)
+
+        if (isNaN(num)) {
+            num = 0
+        }
 
         onChangeText((num + 1).toString())
     }
@@ -49,40 +61,42 @@ const TextCounter: React.FC<IProps> = ({ onChangeText, value }) => {
 
     return (
         <View style={styles.wrapper}>
-            <TouchableHighlight
-                style={styles.touchWrapper}
-                onPress={subtract}
-                onLongPress={toNegative}
-            >
-                <Text
-                    style={[
-                        styles.inputText,
-                        { color: theme.colors.status.critical }
-                    ]}
-                >
-                    -
-                </Text>
-            </TouchableHighlight>
-
             <TextInput
                 style={styles.inputText}
                 value={value}
                 keyboardType="phone-pad"
                 onChangeText={reExperiment}
                 onBlur={parseToFloat}
-                maxLength={5}
+                maxLength={8}
             />
 
-            <TouchableHighlight style={styles.touchWrapper} onPress={add}>
-                <Text
-                    style={[
-                        styles.inputText,
-                        { color: theme.colors.status.normal }
-                    ]}
+            <View style={styles.buttonsWrapper}>
+                <TouchableHighlight
+                    style={styles.touchWrapper}
+                    onPress={subtract}
+                    onLongPress={toNegative}
                 >
-                    +
-                </Text>
-            </TouchableHighlight>
+                    <Text
+                        style={[
+                            styles.inputText,
+                            { color: theme.colors.status.critical }
+                        ]}
+                    >
+                        -
+                    </Text>
+                </TouchableHighlight>
+
+                <TouchableHighlight style={styles.touchWrapper} onPress={add}>
+                    <Text
+                        style={[
+                            styles.inputText,
+                            { color: theme.colors.status.normal }
+                        ]}
+                    >
+                        +
+                    </Text>
+                </TouchableHighlight>
+            </View>
         </View>
     )
 }

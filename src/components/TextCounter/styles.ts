@@ -3,6 +3,10 @@ import theme from '../../styles/theme'
 
 const styles = StyleSheet.create({
     wrapper: {
+        flexDirection: 'column',
+        alignItems: 'center'
+    },
+    buttonsWrapper: {
         flexDirection: 'row'
     },
     inputText: {
