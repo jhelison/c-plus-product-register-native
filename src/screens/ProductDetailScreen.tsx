@@ -75,7 +75,10 @@ const ProductDatailScreen: React.FC<Props> = ({ route, navigation }) => {
                 infoPress={() => setModalVisible(true)}
             />
             {product?.last_stock_update && (
-                <UpdateItem item={product!.last_stock_update} />
+                <UpdateItem
+                    item={product!.last_stock_update}
+                    individual={true}
+                />
             )}
 
             <View style={styles.centerTexts}>

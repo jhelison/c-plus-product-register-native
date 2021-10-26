@@ -9,12 +9,13 @@ const styles = ({ individual }: IProps) =>
     StyleSheet.create({
         wrapper: {
             height: 50,
-            borderBottomColor: theme.colors.lightGray,
+            borderColor: theme.colors.lightGray,
             borderBottomWidth: 1,
             alignItems: 'center',
             justifyContent: 'space-between',
             paddingHorizontal: theme.spacings.medium,
-            flexDirection: 'row'
+            flexDirection: 'row',
+            borderTopWidth: individual ? 1 : 0
         },
         userText: {
             fontSize: theme.font.sizes.large
