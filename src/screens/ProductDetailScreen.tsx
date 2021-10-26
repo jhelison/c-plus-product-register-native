@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Text, ToastAndroid, View, TextInput } from 'react-native'
+import { Text, ToastAndroid, View } from 'react-native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import Header from '../components/Header/Header'
 import Button from '../components/Button/Button'
@@ -37,6 +37,7 @@ const ProductDatailScreen: React.FC<Props> = ({ route, navigation }) => {
         try {
             const res = await api.get(`/products/${CODPROD}`)
             setProduct(res.data as IProduct)
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             ToastAndroid.show(error.message, ToastAndroid.SHORT)
         }
@@ -50,6 +51,7 @@ const ProductDatailScreen: React.FC<Props> = ({ route, navigation }) => {
         try {
             await api.patch(`/stock/?CODPROD=${CODPROD}`, data)
             goBack()
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             ToastAndroid.show(error.message, ToastAndroid.SHORT)
         }
@@ -76,6 +78,7 @@ const ProductDatailScreen: React.FC<Props> = ({ route, navigation }) => {
             />
             {product?.last_stock_update && (
                 <UpdateItem
+                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                     item={product!.last_stock_update}
                     individual={true}
                 />

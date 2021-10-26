@@ -30,6 +30,7 @@ const UpdateModal: React.FC<IProps> = ({
         try {
             const res = await api.get(`/updates/${CODPROD}`)
             setUpdates(res.data as IUpdate[])
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             ToastAndroid.show(error.message, ToastAndroid.SHORT)
         }

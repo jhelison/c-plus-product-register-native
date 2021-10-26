@@ -37,6 +37,7 @@ const App: React.FC = () => {
             const res = await api.post('/auth/', data)
             setToken((res.data as IToken).token)
             setScreen('app')
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             if (error.request?.status === 404) {
                 return setScreen('signin')
@@ -53,8 +54,9 @@ const App: React.FC = () => {
         }
 
         try {
-            const res = await api.put('/users/', data)
+            await api.put('/users/', data)
             getToken()
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             ToastAndroid.show(error.message, ToastAndroid.SHORT)
             setScreen('error')

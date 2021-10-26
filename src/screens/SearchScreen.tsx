@@ -52,6 +52,7 @@ const SearchScreen: React.FC<Props> = ({ navigation }) => {
             setLoading(false)
 
             page = page + 1
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             setLoading(false)
             ToastAndroid.show(error.message, ToastAndroid.SHORT)
@@ -80,15 +81,16 @@ const SearchScreen: React.FC<Props> = ({ navigation }) => {
         flatListRef = ref
     }
 
-    const getProduct = async (CODPROD: string) => {
-        try {
-            const res = await api.get(`/products/${CODPROD}`)
-            return res.data as IProduct
-        } catch (error: any) {
-            ToastAndroid.show(error.message, ToastAndroid.SHORT)
-        }
-    }
+    // const getProduct = async (CODPROD: string) => {
+    //     try {
+    //         const res = await api.get(`/products/${CODPROD}`)
+    //         return res.data as IProduct
+    //     } catch (error: any) {
+    //         ToastAndroid.show(error.message, ToastAndroid.SHORT)
+    //     }
+    // }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const onGoBack = async (CODPROD: string) => {
         onSubmitEditing()
         // const idx = products?.findIndex((product) => {
