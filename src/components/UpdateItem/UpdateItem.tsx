@@ -6,14 +6,17 @@ import styles from './styles'
 import moment from 'moment'
 import theme from '../../styles/theme'
 
-interface IProps {
+export interface IProps {
     item: IUpdate
+    individual?: boolean
 }
 
-const UpdateItem: React.FC<IProps> = ({ item }) => {
+const UpdateItem: React.FC<IProps> = ({ item, individual = false }) => {
+    const styles_with_prop = styles({ individual })
+
     return (
-        <View style={styles.wrapper}>
-            <Text style={[styles.userText, styles.flex2]}>
+        <View style={styles_with_prop.wrapper}>
+            <Text style={[styles_with_prop.userText, styles_with_prop.flex2]}>
                 {item.user.name}
             </Text>
             <Text
@@ -27,12 +30,12 @@ const UpdateItem: React.FC<IProps> = ({ item }) => {
                         fontWeight: 'bold',
                         textAlign: 'center'
                     },
-                    styles.flex1
+                    styles_with_prop.flex1
                 ]}
             >
                 {item.quantity}
             </Text>
-            <Text style={[styles.timeText, styles.flex2]}>
+            <Text style={[styles_with_prop.timeText, styles_with_prop.flex2]}>
                 {moment(item.created_at).fromNow()}
             </Text>
         </View>

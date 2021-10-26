@@ -17,6 +17,7 @@ export interface IProduct {
     FLAGCONTROLAESTOQUE: boolean
     ESTOQUE: IStock
     PRECO: number
+    last_stock_update: IUpdate
 }
 
 export interface IUser {

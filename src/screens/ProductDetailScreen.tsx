@@ -8,6 +8,7 @@ import api from '../API/Axios'
 import { IProduct } from '../types/types'
 import UpdateModal from '../components/UpdateModal/UpdateModal'
 import TextCounter from '../components/TextCounter/TextCounter'
+import UpdateItem from '../components/UpdateItem/UpdateItem'
 
 type RootStackParamList = {
     Search: undefined
@@ -73,6 +74,10 @@ const ProductDatailScreen: React.FC<Props> = ({ route, navigation }) => {
                 title={product?.NOMEPROD}
                 infoPress={() => setModalVisible(true)}
             />
+            {product?.last_stock_update && (
+                <UpdateItem item={product!.last_stock_update} />
+            )}
+
             <View style={styles.centerTexts}>
                 <Text style={styles.stockText}>Estoque atual</Text>
                 <Text style={styles.stockNumber}>
