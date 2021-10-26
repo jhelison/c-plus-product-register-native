@@ -53,11 +53,11 @@ const ProductListItem: React.FC<IProps> = ({
                     <Text> R$</Text>
                 </Text>
                 <Text style={styles.nameText}>
-                    <Text>Estoque: </Text>
                     <Text style={styles.stockText}>
                         {product.ESTOQUE.ESTATU}
                     </Text>
                     <Text> {product.UNIDADE}</Text>
+                    {product.ESTOQUE.ESTATU > 1 ? <Text>s</Text> : null}
                 </Text>
             </View>
 

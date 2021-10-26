@@ -9,18 +9,22 @@ const styles = ({ individual }: IProps) =>
     StyleSheet.create({
         wrapper: {
             height: 50,
-            borderColor: theme.colors.lightGray,
+            borderColor: individual
+                ? theme.colors.status.serious
+                : theme.colors.lightGray,
             borderBottomWidth: 1,
             alignItems: 'center',
             justifyContent: 'space-between',
             paddingHorizontal: theme.spacings.medium,
             flexDirection: 'row',
-            borderTopWidth: individual ? 1 : 0
+            borderWidth: individual ? 1 : 0
         },
         userText: {
+            color: individual ? theme.colors.white : theme.colors.black,
             fontSize: theme.font.sizes.large
         },
         timeText: {
+            color: individual ? theme.colors.white : theme.colors.black,
             textAlign: 'right'
         },
         flex2: {
